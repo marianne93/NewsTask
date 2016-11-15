@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">News</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="news">NEWS</string>
+    <string name="innovation_map">INNOVATION MAP</string>
+    <string name="events_calendar">EVENTS CALENDAR</string>
+    <string name="leadership_thoughts">LEADERSHIP THOUGHTS</string>
+    <string name="language">LANGUAGE</string>
+    <string name="likes">Likes</string>
+    <string name="views">Views</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

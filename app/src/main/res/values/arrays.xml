@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="drawer_items_Titles">
+        <item>@string/news</item>
+        <item>@string/innovation_map</item>
+        <item>@string/events_calendar</item>
+        <item>@string/leadership_thoughts</item>
+        <item>@string/language</item>
+    </string-array>
+</resources>
