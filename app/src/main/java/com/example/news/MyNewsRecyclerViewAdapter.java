@@ -1,6 +1,13 @@
 package com.example.news;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,12 +51,14 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mNews = mValues.get(position);
         mimageLoader = MySingleton.getInstance(mcontext).getImageLoader();
+
         holder.mIcon.setImageUrl(holder.mNews.imageIcon, mimageLoader);
         holder.mTitle.setText(holder.mNews.newsTitle);
         holder.mNewsType.setImageUrl(holder.mNews.newsType, mimageLoader);
         holder.mDate.setText(holder.mNews.postDate);
        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes)+"("+holder.mNews.likes+")");
         holder.mViews.setText(holder.mNews.numOfViews +" "+mcontext.getResources().getString(R.string.views));
+        holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
       //  holder.mIdView.setText(mValues.get(position).id);
      //   holder.mContentView.setText(mValues.get(position).content);
 
@@ -72,28 +81,32 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final NetworkImageView mIcon;
+        public final CircularNetworkImageView mIcon;
         public final TextView mTitle;
         public final NetworkImageView mNewsType;
         public final TextView mDate;
         public final TextView mLikes;
         public final TextView mViews;
         public News mNews;
+        public CardView mCardView;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIcon = (NetworkImageView) view.findViewById(R.id.list_item_icon);
+            mIcon = (CircularNetworkImageView) view.findViewById(R.id.list_item_icon);
             mTitle = (TextView) view.findViewById(R.id.list_item_news_title);
             mNewsType = (NetworkImageView) view.findViewById(R.id.list_item_news_type);
             mDate = (TextView) view.findViewById(R.id.list_item_news_date);
             mLikes = (TextView) view.findViewById(R.id.list_item_news_likes);
             mViews = (TextView) view.findViewById(R.id.list_item_news_views);
+            mCardView = (CardView) view.findViewById(R.id.card_view);
         }
 
     //    @Override
      //   public String toString() {
     //        return super.toString() + " '" + mContentView.getText() + "'";
     //    }
+
     }
+
 }
