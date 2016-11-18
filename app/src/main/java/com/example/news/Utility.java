@@ -41,4 +41,20 @@ public class Utility {
 
         return -1;
     }
+
+    public static int getImageResourceForNewsType(String newsTypeId) {
+        switch (newsTypeId) {
+            case "84": {
+                return R.drawable.article_label;
+
+            }
+            case "85": {
+                return R.drawable.video_label;
+
+            }
+
+
+        }
+        return -1;
+    }
 }

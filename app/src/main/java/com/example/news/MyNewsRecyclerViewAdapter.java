@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -54,11 +55,12 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
 
         holder.mIcon.setImageUrl(holder.mNews.imageIcon, mimageLoader);
         holder.mTitle.setText(holder.mNews.newsTitle);
-        holder.mNewsType.setImageUrl(holder.mNews.newsType, mimageLoader);
+        holder.mNewsType.setImageResource(Utility.getImageResourceForNewsType(holder.mNews.newsType));
         holder.mDate.setText(holder.mNews.postDate);
        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes)+"("+holder.mNews.likes+")");
         holder.mViews.setText(holder.mNews.numOfViews +" "+mcontext.getResources().getString(R.string.views));
         holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
+
       //  holder.mIdView.setText(mValues.get(position).id);
      //   holder.mContentView.setText(mValues.get(position).content);
 
@@ -83,19 +85,20 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
         public final View mView;
         public final CircularNetworkImageView mIcon;
         public final TextView mTitle;
-        public final NetworkImageView mNewsType;
+        public final ImageView mNewsType;
         public final TextView mDate;
         public final TextView mLikes;
         public final TextView mViews;
         public News mNews;
         public CardView mCardView;
 
+
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIcon = (CircularNetworkImageView) view.findViewById(R.id.list_item_icon);
             mTitle = (TextView) view.findViewById(R.id.list_item_news_title);
-            mNewsType = (NetworkImageView) view.findViewById(R.id.list_item_news_type);
+            mNewsType = (ImageView) view.findViewById(R.id.list_item_news_type);
             mDate = (TextView) view.findViewById(R.id.list_item_news_date);
             mLikes = (TextView) view.findViewById(R.id.list_item_news_likes);
             mViews = (TextView) view.findViewById(R.id.list_item_news_views);
