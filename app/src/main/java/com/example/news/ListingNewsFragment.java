@@ -32,11 +32,13 @@ public class ListingNewsFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String TAG = "RequestTag";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     public static ArrayList<News> newsArrayList = new ArrayList<News>();
     MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -70,14 +72,14 @@ public class ListingNewsFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-           Context context = view.getContext();
+            Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-           if (mColumnCount <= 1) {
+            if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
-           } else {
+            } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(newsArrayList, mListener , getActivity());
+            myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(newsArrayList, mListener, getActivity());
             recyclerView.setAdapter(myNewsRecyclerViewAdapter);
         }
         return view;
@@ -100,7 +102,7 @@ public class ListingNewsFragment extends Fragment {
 
                         getNewsDataFromJson(response);
                         myNewsRecyclerViewAdapter.notifyDataSetChanged();
-                        Toast.makeText(getActivity() , "called" ,Toast.LENGTH_LONG).show();
+
 
                     }
 
@@ -109,11 +111,13 @@ public class ListingNewsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity() , "calledError" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_LONG).show();
 
                     }
                 }
         );
+        jsonObjectRequest.setTag(TAG);
+
 
         //Adding our request to the queue
         MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
@@ -131,7 +135,7 @@ public class ListingNewsFragment extends Fragment {
         final String LIKES = "Likes";
         try {
             JSONArray newsArray = response.getJSONArray(NEWS_LIST);
-            News news ;
+            News news;
             for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject newsObj = newsArray.getJSONObject(i);
                 news = new News();
@@ -162,6 +166,14 @@ public class ListingNewsFragment extends Fragment {
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (MySingleton.getInstance(getActivity()).getRequestQueue() != null) {
+            MySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
         }
     }
 

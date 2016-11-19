@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity
                 this, mdrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mdrawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        //    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //    navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -92,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         ImageView v = (ImageView) mSearchView.findViewById(searchImgId);
         v.setImageResource(R.drawable.filter);
 
+
         return super.onPrepareOptionsMenu(menu);
 
     }
@@ -100,7 +98,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        msearch= (SearchView) menu.findItem(R.id.action_search).getActionView();
+        msearch = (SearchView) menu.findItem(R.id.action_search).getActionView();
         msearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -124,30 +122,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-   /* @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    } */
 
     @Override
     public void onListFragmentInteraction(News news) {
