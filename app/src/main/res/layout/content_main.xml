@@ -13,7 +13,7 @@
     tools:context="com.example.news.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:background="@drawable/listing_background">
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

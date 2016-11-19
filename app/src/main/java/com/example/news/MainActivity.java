@@ -125,12 +125,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-        NewsDetailsFragment newsDetailsFragment = new NewsDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(NewsDetailsFragment.DETAIL_PARAM, news.nId);
-        newsDetailsFragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newsDetailsFragment, DETAILFRAGMENT_TAG).commit();
-
 
     }
 }
