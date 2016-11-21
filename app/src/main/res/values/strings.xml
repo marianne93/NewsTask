@@ -12,6 +12,7 @@
     <string name="language">LANGUAGE</string>
     <string name="likes">Likes</string>
     <string name="views">Views</string>
+    <string name="search">Search</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
