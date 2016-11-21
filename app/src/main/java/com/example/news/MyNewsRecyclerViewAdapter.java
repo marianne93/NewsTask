@@ -33,7 +33,8 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
     private final OnListFragmentInteractionListener mListener;
     private Context mcontext;
     private ImageLoader mimageLoader;
-    public MyNewsRecyclerViewAdapter(ArrayList<News> items, OnListFragmentInteractionListener listener , Context context) {
+
+    public MyNewsRecyclerViewAdapter(ArrayList<News> items, OnListFragmentInteractionListener listener, Context context) {
         mValues = items;
         mListener = listener;
         mcontext = context;
@@ -57,12 +58,10 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
         holder.mTitle.setText(holder.mNews.newsTitle);
         holder.mNewsType.setImageResource(Utility.getImageResourceForNewsType(holder.mNews.newsType));
         holder.mDate.setText(holder.mNews.postDate);
-       holder.mLikes.setText(mcontext.getResources().getString(R.string.likes)+"("+holder.mNews.likes+")");
-        holder.mViews.setText(holder.mNews.numOfViews +" "+mcontext.getResources().getString(R.string.views));
+        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes) + "(" + holder.mNews.likes + ")");
+        holder.mViews.setText(holder.mNews.numOfViews + " " + mcontext.getResources().getString(R.string.views));
         holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
 
-      //  holder.mIdView.setText(mValues.get(position).id);
-     //   holder.mContentView.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +104,6 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
             mCardView = (CardView) view.findViewById(R.id.card_view);
         }
 
-    //    @Override
-     //   public String toString() {
-    //        return super.toString() + " '" + mContentView.getText() + "'";
-    //    }
 
     }
 
