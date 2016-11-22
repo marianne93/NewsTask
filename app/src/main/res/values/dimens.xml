@@ -7,5 +7,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">10dp</dimen>
     <dimen name="card_margin">1dp</dimen>
-    <dimen name="card_news_radius">10dp</dimen>
+    <dimen name="card_news_radius">5dp</dimen>
 </resources>
