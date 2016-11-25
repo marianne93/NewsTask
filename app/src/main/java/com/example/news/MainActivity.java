@@ -1,5 +1,6 @@
 package com.example.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<String> mDrawerItemsTitles = new ArrayList<String>();
     private DrawerItemsAdapter drawerItemsAdapter;
     private static final String NEWSLISTINGFRAGMENT_TAG = "lFTAG";
+    public static final String NEWSID = "id";
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
     private SearchView msearch;
 
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-
+        Intent intent = new Intent(this, NewsDetails.class).putExtra(NEWSID ,news.nId);
+        startActivity(intent);
     }
 }
