@@ -9,4 +9,4 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="com.example.news.ListingNewsFragment"
      />
-<!-- tools:listitem="@layout/fragment_item" -->
+<!-- tools:listitem="@layout/fragment_list_item" -->
