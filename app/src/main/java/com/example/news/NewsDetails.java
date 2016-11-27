@@ -21,4 +21,4 @@ public class NewsDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
-    }
+}
