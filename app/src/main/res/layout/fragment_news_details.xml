@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
 
-                <com.example.news.CircularNetworkImageView
+                <com.android.volley.toolbox.NetworkImageView
 
                     android:id="@+id/news_image"
                     android:layout_width="match_parent"
