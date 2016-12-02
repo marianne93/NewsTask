@@ -8,6 +8,8 @@
     <color name="transparentWhite">#CCFFFFFF</color>
     <color name="transparentRed">#96E62A3B</color>
     <color name="lightRed">#CCE62A3B</color>
+    <color name="red">#E3242D</color>
+    <color name="yellow">#FFC300</color>
 
     <color name="black">#000000</color>
 

@@ -2,7 +2,6 @@ package com.example.news;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -27,8 +26,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.FileNameMap;
-
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -45,6 +42,7 @@ public class NewsDetailsFragment extends Fragment {
     private TextView mNewsViews;
     private TextView mNewsDescription;
     private ImageLoader mimageLoader;
+    private String mShareURL;
 
     public NewsDetailsFragment() {
         setHasOptionsMenu(true);
@@ -55,7 +53,7 @@ public class NewsDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         mNewsID = getActivity().getIntent().getStringExtra(MainActivity.NEWSID);
         // Toast.makeText(getActivity(), newsID, Toast.LENGTH_LONG).show();
-        View rootView =  inflater.inflate(R.layout.fragment_news_details, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_news_details, container, false);
         mNewsTitle = (TextView) rootView.findViewById(R.id.news_title);
         mNewsImage = (NetworkImageView) rootView.findViewById(R.id.news_image);
         mNewsDate = (TextView) rootView.findViewById(R.id.news_date);
@@ -64,8 +62,6 @@ public class NewsDetailsFragment extends Fragment {
         mNewsViews = (TextView) rootView.findViewById(R.id.news_views);
         mNewsViewsIcon = (ImageView) rootView.findViewById(R.id.news_views_icon);
         mNewsDescription = (TextView) rootView.findViewById(R.id.news_description);
-
-
 
 
         return rootView;
@@ -117,7 +113,7 @@ public class NewsDetailsFragment extends Fragment {
     }
 
     private void getNewsDetailsFromJson(JSONObject response) throws JSONException {
-        final String NEWSITEM  = "newsItem";
+        final String NEWSITEM = "newsItem";
         final String NEWSTITLE = "NewsTitle";
         final String IMAGEURL = "ImageUrl";
         final String NUMOFVIEWS = "NumofViews";
@@ -130,14 +126,15 @@ public class NewsDetailsFragment extends Fragment {
         JSONObject newsObj = response.getJSONObject(NEWSITEM);
         mNewsTitle.setText(newsObj.getString(NEWSTITLE));
         mimageLoader = MySingleton.getInstance(getActivity()).getImageLoader();
-        mNewsImage.setImageUrl(newsObj.getString(IMAGEURL),mimageLoader);
+        mNewsImage.setImageUrl(newsObj.getString(IMAGEURL), mimageLoader);
         mNewsDate.setText(newsObj.getString(POSTDATE));
         mNewsLikesIcon.setImageResource(R.drawable.likes);
-        mNewsLikes.setText(newsObj.getString(LIKES));
+        mNewsLikes.setText(getActivity().getResources().getString(R.string.likes) + " (" + newsObj.getString(LIKES) + ")");
         mNewsViewsIcon.setImageResource(R.drawable.views_icon);
+        mNewsViews.setText(newsObj.getString(NUMOFVIEWS) + " " + getActivity().getResources().getString(R.string.views));
         mNewsDescription.setText(newsObj.getString(DESCRIPTION));
-
-
+        mShareURL = newsObj.getString(SHAREURL);
+        mShareActionProvider.setShareIntent(createShareNewsIntent());
 
     }
 
@@ -153,15 +150,15 @@ public class NewsDetailsFragment extends Fragment {
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
 
-        mShareActionProvider.setShareIntent(createShareForecastIntent());
+        mShareActionProvider.setShareIntent(createShareNewsIntent());
 
     }
 
-    private Intent createShareForecastIntent() {
+    private Intent createShareNewsIntent() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        //    shareIntent.putExtra(Intent.EXTRA_TEXT, mForecast + FORECAST_SHARE_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mShareURL);
         return shareIntent;
     }
 
