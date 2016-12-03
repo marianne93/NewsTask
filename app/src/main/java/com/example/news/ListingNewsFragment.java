@@ -30,11 +30,8 @@ import java.util.ArrayList;
  */
 public class ListingNewsFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String TAG = "RequestTag";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     public static ArrayList<News> newsArrayList = new ArrayList<News>();
     MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
@@ -46,23 +43,11 @@ public class ListingNewsFragment extends Fragment {
     public ListingNewsFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
- /*   public static ListingNewsFragment newInstance(int columnCount) {
-        ListingNewsFragment fragment = new ListingNewsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    } */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -70,18 +55,11 @@ public class ListingNewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(newsArrayList, mListener, getActivity());
-            recyclerView.setAdapter(myNewsRecyclerViewAdapter);
-        }
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(newsArrayList, mListener, getActivity());
+        recyclerView.setAdapter(myNewsRecyclerViewAdapter);
         return view;
     }
 

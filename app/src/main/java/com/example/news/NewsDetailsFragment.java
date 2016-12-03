@@ -162,4 +162,11 @@ public class NewsDetailsFragment extends Fragment {
         return shareIntent;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (MySingleton.getInstance(getActivity()).getRequestQueue() != null) {
+            MySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
+        }
+    }
 }
