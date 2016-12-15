@@ -1,4 +1,6 @@
-package com.example.news;
+package com.example.news.utils;
+
+import com.example.news.R;
 
 /**
  * Created by Marianne on 12-Nov-16.

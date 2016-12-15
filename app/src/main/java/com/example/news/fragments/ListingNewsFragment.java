@@ -1,10 +1,9 @@
-package com.example.news;
+package com.example.news.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +14,10 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.news.adapters.MyNewsRecyclerViewAdapter;
+import com.example.news.utils.VolleySingleton;
+import com.example.news.utils.News;
+import com.example.news.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,7 +101,7 @@ public class ListingNewsFragment extends Fragment {
 
 
         //Adding our request to the queue
-        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
 
     }
 
@@ -150,8 +153,8 @@ public class ListingNewsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (MySingleton.getInstance(getActivity()).getRequestQueue() != null) {
-            MySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
+        if (VolleySingleton.getInstance(getActivity()).getRequestQueue() != null) {
+            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.news.R;
 
 /**
  * Created by Marianne.Wazif on 16-Nov-16.

@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.utils;
 
 /**
  * Created by marianne.wazif on 13-Nov-16.

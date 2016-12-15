@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.news.utils.VolleySingleton;
+import com.example.news.R;
+import com.example.news.activities.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,7 +112,7 @@ public class NewsDetailsFragment extends Fragment {
 
 
         //Adding our request to the queue
-        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
     }
 
     private void getNewsDetailsFromJson(JSONObject response) throws JSONException {
@@ -125,7 +128,7 @@ public class NewsDetailsFragment extends Fragment {
         // TODO: bind Data to views
         JSONObject newsObj = response.getJSONObject(NEWSITEM);
         mNewsTitle.setText(newsObj.getString(NEWSTITLE));
-        mimageLoader = MySingleton.getInstance(getActivity()).getImageLoader();
+        mimageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
         mNewsImage.setImageUrl(newsObj.getString(IMAGEURL), mimageLoader);
         mNewsDate.setText(newsObj.getString(POSTDATE));
         mNewsLikesIcon.setImageResource(R.drawable.likes);
@@ -165,8 +168,8 @@ public class NewsDetailsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (MySingleton.getInstance(getActivity()).getRequestQueue() != null) {
-            MySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
+        if (VolleySingleton.getInstance(getActivity()).getRequestQueue() != null) {
+            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
         }
     }
 }

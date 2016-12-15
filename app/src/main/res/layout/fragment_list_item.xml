@@ -23,7 +23,7 @@
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <com.example.news.CircularNetworkImageView
+                <com.example.news.views.CircularNetworkImageView
 
                     android:id="@+id/list_item_icon"
                     android:layout_width="80dp"

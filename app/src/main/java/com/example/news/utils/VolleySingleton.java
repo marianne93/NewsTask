@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,13 +12,13 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by Marianne on 02-Jul-16.
  */
-public class MySingleton {
-    private static MySingleton mInstance;
+public class VolleySingleton {
+    private static VolleySingleton mInstance;
     private  RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private static Context mcontext;
 
-    private MySingleton(Context context) {
+    private VolleySingleton(Context context) {
         mcontext = context;
         mRequestQueue = getRequestQueue();
 
@@ -39,9 +39,9 @@ public class MySingleton {
                 });
     }
 
-    public static synchronized MySingleton getInstance(Context context) {
+    public static synchronized VolleySingleton getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new MySingleton(context);
+            mInstance = new VolleySingleton(context);
         }
         return mInstance;
     }

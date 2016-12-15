@@ -1,4 +1,4 @@
-package com.example.news;
+package com.example.news.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -10,7 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.example.news.ListingNewsFragment.OnListFragmentInteractionListener;
+import com.example.news.utils.VolleySingleton;
+import com.example.news.utils.News;
+import com.example.news.R;
+import com.example.news.utils.Utility;
+import com.example.news.fragments.ListingNewsFragment.OnListFragmentInteractionListener;
+import com.example.news.views.CircularNetworkImageView;
 // import com.example.news.dummy.DummyContent.News;
 
 import java.util.ArrayList;
@@ -45,7 +50,7 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mNews = mValues.get(position);
-        mimageLoader = MySingleton.getInstance(mcontext).getImageLoader();
+        mimageLoader = VolleySingleton.getInstance(mcontext).getImageLoader();
 
         holder.mIcon.setImageUrl(holder.mNews.imageIcon, mimageLoader);
         holder.mTitle.setText(holder.mNews.newsTitle);
