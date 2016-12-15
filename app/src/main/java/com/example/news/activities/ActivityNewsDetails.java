@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.example.news.R;
 
-public class NewsDetails extends AppCompatActivity {
+public class ActivityNewsDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

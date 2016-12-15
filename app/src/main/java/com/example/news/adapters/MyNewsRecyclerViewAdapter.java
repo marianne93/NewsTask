@@ -14,7 +14,7 @@ import com.example.news.utils.VolleySingleton;
 import com.example.news.utils.News;
 import com.example.news.R;
 import com.example.news.utils.Utility;
-import com.example.news.fragments.ListingNewsFragment.OnListFragmentInteractionListener;
+import com.example.news.fragments.FragmentListingNews.OnListFragmentInteractionListener;
 import com.example.news.views.CircularNetworkImageView;
 // import com.example.news.dummy.DummyContent.News;
 

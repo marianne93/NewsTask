@@ -24,7 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.news.utils.VolleySingleton;
 import com.example.news.R;
-import com.example.news.activities.MainActivity;
+import com.example.news.activities.ActivityListingNews;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +32,7 @@ import org.json.JSONObject;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NewsDetailsFragment extends Fragment {
+public class FragmentNewsDetails extends Fragment {
     private ShareActionProvider mShareActionProvider;
     private static final String TAG = "DetailsRequestTag";
     private String mNewsID;
@@ -47,14 +47,14 @@ public class NewsDetailsFragment extends Fragment {
     private ImageLoader mimageLoader;
     private String mShareURL;
 
-    public NewsDetailsFragment() {
+    public FragmentNewsDetails() {
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mNewsID = getActivity().getIntent().getStringExtra(MainActivity.NEWSID);
+        mNewsID = getActivity().getIntent().getStringExtra(ActivityListingNews.NEWSID);
         // Toast.makeText(getActivity(), newsID, Toast.LENGTH_LONG).show();
         View rootView = inflater.inflate(R.layout.fragment_news_details, container, false);
         mNewsTitle = (TextView) rootView.findViewById(R.id.news_title);

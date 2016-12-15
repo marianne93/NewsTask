@@ -17,15 +17,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.news.adapters.DrawerItemsAdapter;
-import com.example.news.fragments.ListingNewsFragment;
+import com.example.news.fragments.FragmentListingNews;
 import com.example.news.utils.News;
 import com.example.news.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity
-        implements ListingNewsFragment.OnListFragmentInteractionListener {
+public class ActivityListingNews extends AppCompatActivity
+        implements FragmentListingNews.OnListFragmentInteractionListener {
     private DrawerLayout mdrawer;
     private ListView mDrawerList;
     private ArrayList<String> mDrawerItemsTitles = new ArrayList<String>();
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_listing_news);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         mDrawerList.setAdapter(drawerItemsAdapter);
         if (savedInstanceState == null) {
 
-            ListingNewsFragment fragment = new ListingNewsFragment();
+            FragmentListingNews fragment = new FragmentListingNews();
 
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, NEWSLISTINGFRAGMENT_TAG).commit();
         }
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-        Intent intent = new Intent(this, NewsDetails.class).putExtra(NEWSID ,news.nId);
+        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(NEWSID ,news.nId);
         startActivity(intent);
     }
 }

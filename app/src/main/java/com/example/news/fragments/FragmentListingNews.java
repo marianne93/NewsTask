@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ListingNewsFragment extends Fragment {
+public class FragmentListingNews extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String TAG = "RequestTag";
@@ -43,7 +43,7 @@ public class ListingNewsFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListingNewsFragment() {
+    public FragmentListingNews() {
     }
 
 
