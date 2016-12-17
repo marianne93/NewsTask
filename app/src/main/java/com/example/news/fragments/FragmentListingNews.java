@@ -15,10 +15,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.news.adapters.MyNewsRecyclerViewAdapter;
+import com.example.news.utils.NewsResponse;
 import com.example.news.utils.VolleySingleton;
 import com.example.news.utils.News;
 import com.example.news.R;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -109,9 +111,9 @@ public class FragmentListingNews extends Fragment {
     }
 
     private void getNewsDataFromJson(JSONObject response) {
-        final String NEWS_LIST = "News";
+  //      final String NEWS_LIST = "News";
 
-        Gson gson = new Gson();
+    /*    Gson gson = new Gson();
 
         try {
             JSONArray newsArray = response.getJSONArray(NEWS_LIST);
@@ -123,12 +125,12 @@ public class FragmentListingNews extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+*/
 
-        //Expected a string but was BEGIN_ARRAY
-      /*  String newsStr = response.toString();
-
-        NewsResponse newsResponse =gson.fromJson(newsStr, NewsResponse.class);
-        newsArrayList.addAll(newsResponse.news); */
+        String newsStr = response.toString();
+        Gson gson = new GsonBuilder().create();
+        NewsResponse newsResponse = gson.fromJson(newsStr, NewsResponse.class);
+        newsArrayList.addAll(newsResponse.News);
 
 
     }

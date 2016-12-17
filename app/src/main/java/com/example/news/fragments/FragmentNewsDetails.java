@@ -22,9 +22,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.news.utils.NewsDetailsResponse;
+import com.example.news.utils.NewsResponse;
 import com.example.news.utils.VolleySingleton;
 import com.example.news.R;
 import com.example.news.activities.ActivityListingNews;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -116,7 +120,24 @@ public class FragmentNewsDetails extends Fragment {
     }
 
     private void getNewsDetailsFromJson(JSONObject response) throws JSONException {
-        final String NEWSITEM = "newsItem";
+        String newsStr = response.toString();
+        Gson gson = new GsonBuilder().create();
+        NewsDetailsResponse newsDetailsResponse = gson.fromJson(newsStr, NewsDetailsResponse.class);
+        mNewsTitle.setText(newsDetailsResponse.newsItem.NewsTitle);
+        mimageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
+        mNewsImage.setImageUrl(newsDetailsResponse.newsItem.ImageUrl, mimageLoader);
+        mNewsDate.setText(newsDetailsResponse.newsItem.PostDate);
+        mNewsLikesIcon.setImageResource(R.drawable.likes);
+        mNewsLikes.setText(getActivity().getResources().getString(R.string.likes) + " (" + newsDetailsResponse.newsItem.Likes + ")");
+        mNewsViewsIcon.setImageResource(R.drawable.views_icon);
+        mNewsViews.setText(newsDetailsResponse.newsItem.NumofViews + " " + getActivity().getResources().getString(R.string.views));
+        mNewsDescription.setText(newsDetailsResponse.newsItem.ItemDescription);
+        mShareURL = newsDetailsResponse.newsItem.ShareURL;
+        mShareActionProvider.setShareIntent(createShareNewsIntent());
+
+
+
+       /* final String NEWSITEM = "newsItem";
         final String NEWSTITLE = "NewsTitle";
         final String IMAGEURL = "ImageUrl";
         final String NUMOFVIEWS = "NumofViews";
@@ -137,7 +158,7 @@ public class FragmentNewsDetails extends Fragment {
         mNewsViews.setText(newsObj.getString(NUMOFVIEWS) + " " + getActivity().getResources().getString(R.string.views));
         mNewsDescription.setText(newsObj.getString(DESCRIPTION));
         mShareURL = newsObj.getString(SHAREURL);
-        mShareActionProvider.setShareIntent(createShareNewsIntent());
+        mShareActionProvider.setShareIntent(createShareNewsIntent()); */
 
     }
 
