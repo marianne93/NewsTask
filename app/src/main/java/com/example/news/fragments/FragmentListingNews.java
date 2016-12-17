@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -44,6 +45,8 @@ public class FragmentListingNews extends Fragment {
     private OnListFragmentInteractionListener mListener;
     public static ArrayList<News> newsArrayList = new ArrayList<>();
     MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
+    ProgressBar mProgressBar;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -57,6 +60,7 @@ public class FragmentListingNews extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -66,6 +70,8 @@ public class FragmentListingNews extends Fragment {
 
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(newsArrayList, mListener, getActivity());
         recyclerView.setAdapter(myNewsRecyclerViewAdapter);
@@ -95,6 +101,7 @@ public class FragmentListingNews extends Fragment {
 
                         getNewsDataFromJson(response);
                         myNewsRecyclerViewAdapter.notifyDataSetChanged();
+                        mProgressBar.setVisibility(View.GONE);
 
 
                     }

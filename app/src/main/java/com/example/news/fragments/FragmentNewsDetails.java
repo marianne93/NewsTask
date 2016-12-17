@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,8 @@ public class FragmentNewsDetails extends Fragment {
     private TextView mNewsDescription;
     private ImageLoader mimageLoader;
     private String mShareURL;
+    ProgressBar mProgressBar;
+
 
     public FragmentNewsDetails() {
         setHasOptionsMenu(true);
@@ -59,9 +62,13 @@ public class FragmentNewsDetails extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         mNewsID = getActivity().getIntent().getStringExtra(ActivityListingNews.NEWSID);
         // Toast.makeText(getActivity(), newsID, Toast.LENGTH_LONG).show();
         View rootView = inflater.inflate(R.layout.fragment_news_details, container, false);
+        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.VISIBLE);
+
         mNewsTitle = (TextView) rootView.findViewById(R.id.news_title);
         mNewsImage = (NetworkImageView) rootView.findViewById(R.id.news_image);
         mNewsDate = (TextView) rootView.findViewById(R.id.news_date);
@@ -102,6 +109,8 @@ public class FragmentNewsDetails extends Fragment {
 
                         try {
                             getNewsDetailsFromJson(response);
+                            mProgressBar.setVisibility(View.GONE);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

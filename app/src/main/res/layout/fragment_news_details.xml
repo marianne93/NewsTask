@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/listing_background">
+    <include layout="@layout/progress_indicator"></include>
+
 
     <ScrollView
         android:layout_width="match_parent"
