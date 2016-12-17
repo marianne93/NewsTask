@@ -135,31 +135,6 @@ public class FragmentNewsDetails extends Fragment {
         mShareURL = newsDetailsResponse.newsItem.ShareURL;
         mShareActionProvider.setShareIntent(createShareNewsIntent());
 
-
-
-       /* final String NEWSITEM = "newsItem";
-        final String NEWSTITLE = "NewsTitle";
-        final String IMAGEURL = "ImageUrl";
-        final String NUMOFVIEWS = "NumofViews";
-        final String LIKES = "Likes";
-        final String DESCRIPTION = "ItemDescription";
-        final String SHAREURL = "ShareURL";
-        final String POSTDATE = "PostDate";
-
-        // TODO: bind Data to views
-        JSONObject newsObj = response.getJSONObject(NEWSITEM);
-        mNewsTitle.setText(newsObj.getString(NEWSTITLE));
-        mimageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
-        mNewsImage.setImageUrl(newsObj.getString(IMAGEURL), mimageLoader);
-        mNewsDate.setText(newsObj.getString(POSTDATE));
-        mNewsLikesIcon.setImageResource(R.drawable.likes);
-        mNewsLikes.setText(getActivity().getResources().getString(R.string.likes) + " (" + newsObj.getString(LIKES) + ")");
-        mNewsViewsIcon.setImageResource(R.drawable.views_icon);
-        mNewsViews.setText(newsObj.getString(NUMOFVIEWS) + " " + getActivity().getResources().getString(R.string.views));
-        mNewsDescription.setText(newsObj.getString(DESCRIPTION));
-        mShareURL = newsObj.getString(SHAREURL);
-        mShareActionProvider.setShareIntent(createShareNewsIntent()); */
-
     }
 
     @Override

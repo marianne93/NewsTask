@@ -111,21 +111,6 @@ public class FragmentListingNews extends Fragment {
     }
 
     private void getNewsDataFromJson(JSONObject response) {
-  //      final String NEWS_LIST = "News";
-
-    /*    Gson gson = new Gson();
-
-        try {
-            JSONArray newsArray = response.getJSONArray(NEWS_LIST);
-            String newsStr = newsArray.toString();
-
-            List<News> newsResponse = Arrays.asList(gson.fromJson(newsStr, News[].class));
-            newsArrayList.addAll(newsResponse);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-*/
 
         String newsStr = response.toString();
         Gson gson = new GsonBuilder().create();

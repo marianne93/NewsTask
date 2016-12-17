@@ -3,6 +3,8 @@ package com.example.news.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -27,12 +29,11 @@ import java.util.Arrays;
 public class ActivityListingNews extends AppCompatActivity
         implements FragmentListingNews.OnListFragmentInteractionListener {
     private DrawerLayout mdrawer;
-    private ListView mDrawerList;
+    private RecyclerView mDrawerList;
     private ArrayList<String> mDrawerItemsTitles = new ArrayList<String>();
     private DrawerItemsAdapter drawerItemsAdapter;
     private static final String NEWSLISTINGFRAGMENT_TAG = "lFTAG";
     public static final String NEWSID = "id";
-    private static final String DETAILFRAGMENT_TAG = "DFTAG";
     private SearchView msearch;
 
     @Override
@@ -44,8 +45,9 @@ public class ActivityListingNews extends AppCompatActivity
 
 
         mdrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
         mDrawerItemsTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drawer_items_Titles)));
+        mDrawerList.setLayoutManager(new LinearLayoutManager(this));
 
         drawerItemsAdapter = new DrawerItemsAdapter(this, mDrawerItemsTitles);
 
@@ -58,7 +60,7 @@ public class ActivityListingNews extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, NEWSLISTINGFRAGMENT_TAG).commit();
         }
         // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+  /*      mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -68,7 +70,7 @@ public class ActivityListingNews extends AppCompatActivity
 
             }
         });
-
+*/
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mdrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
