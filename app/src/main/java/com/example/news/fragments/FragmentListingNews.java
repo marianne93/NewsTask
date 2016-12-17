@@ -18,12 +18,15 @@ import com.example.news.adapters.MyNewsRecyclerViewAdapter;
 import com.example.news.utils.VolleySingleton;
 import com.example.news.utils.News;
 import com.example.news.R;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -36,7 +39,7 @@ public class FragmentListingNews extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String TAG = "RequestTag";
     private OnListFragmentInteractionListener mListener;
-    public static ArrayList<News> newsArrayList = new ArrayList<News>();
+    public static ArrayList<News> newsArrayList = new ArrayList<>();
     MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
 
     /**
@@ -107,32 +110,25 @@ public class FragmentListingNews extends Fragment {
 
     private void getNewsDataFromJson(JSONObject response) {
         final String NEWS_LIST = "News";
-        final String NEWSTITLE = "NewsTitle";
-        final String NID = "Nid";
-        final String POSTDATE = "PostDate";
-        final String IMAGEURL = "ImageUrl";
-        final String NEWSTYPE = "NewsType";
-        final String NUMOFVIEWS = "NumofViews";
-        final String LIKES = "Likes";
+
+        Gson gson = new Gson();
+
         try {
             JSONArray newsArray = response.getJSONArray(NEWS_LIST);
-            News news;
-            for (int i = 0; i < newsArray.length(); i++) {
-                JSONObject newsObj = newsArray.getJSONObject(i);
-                news = new News();
-                news.imageIcon = newsObj.getString(IMAGEURL);
-                news.likes = newsObj.getString(LIKES);
-                news.newsTitle = newsObj.getString(NEWSTITLE);
-                news.newsType = newsObj.getString(NEWSTYPE);
-                news.numOfViews = newsObj.getString(NUMOFVIEWS);
-                news.postDate = newsObj.getString(POSTDATE);
-                news.nId = newsObj.getString(NID);
-                newsArrayList.add(news);
+            String newsStr = newsArray.toString();
 
-            }
+            List<News> newsResponse = Arrays.asList(gson.fromJson(newsStr, News[].class));
+            newsArrayList.addAll(newsResponse);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        //Expected a string but was BEGIN_ARRAY
+      /*  String newsStr = response.toString();
+
+        NewsResponse newsResponse =gson.fromJson(newsStr, NewsResponse.class);
+        newsArrayList.addAll(newsResponse.news); */
 
 
     }

@@ -1,15 +1,19 @@
 package com.example.news.utils;
 
+import java.util.List;
+
 /**
  * Created by marianne.wazif on 13-Nov-16.
  */
 
 public class News {
-    public String newsTitle;
-    public String newsType;
-    public String postDate;
-    public String imageIcon;
-    public String numOfViews;
-    public String likes;
-    public String nId;
+    public String NewsTitle;
+    public String NewsType;
+    public String PostDate;
+    public String ImageUrl;
+    public String NumofViews;
+    public String Likes;
+    public String Nid;
+
 }
+

@@ -52,12 +52,12 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
         holder.mNews = mValues.get(position);
         mimageLoader = VolleySingleton.getInstance(mcontext).getImageLoader();
 
-        holder.mIcon.setImageUrl(holder.mNews.imageIcon, mimageLoader);
-        holder.mTitle.setText(holder.mNews.newsTitle);
-        holder.mNewsType.setImageResource(Utility.getImageResourceForNewsType(holder.mNews.newsType));
-        holder.mDate.setText(holder.mNews.postDate);
-        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes) + "(" + holder.mNews.likes + ")");
-        holder.mViews.setText(holder.mNews.numOfViews + " " + mcontext.getResources().getString(R.string.views));
+        holder.mIcon.setImageUrl(holder.mNews.ImageUrl, mimageLoader);
+        holder.mTitle.setText(holder.mNews.NewsTitle);
+        holder.mNewsType.setImageResource(Utility.getImageResourceForNewsType(holder.mNews.NewsType));
+        holder.mDate.setText(holder.mNews.PostDate);
+        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes) + "(" + holder.mNews.Likes + ")");
+        holder.mViews.setText(holder.mNews.NumofViews + " " + mcontext.getResources().getString(R.string.views));
         holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
 
 

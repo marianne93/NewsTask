@@ -18,8 +18,8 @@ import android.widget.ListView;
 
 import com.example.news.adapters.DrawerItemsAdapter;
 import com.example.news.fragments.FragmentListingNews;
-import com.example.news.utils.News;
 import com.example.news.R;
+import com.example.news.utils.News;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,7 +130,7 @@ public class ActivityListingNews extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(NEWSID ,news.nId);
+        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(NEWSID ,news.Nid);
         startActivity(intent);
     }
 }
