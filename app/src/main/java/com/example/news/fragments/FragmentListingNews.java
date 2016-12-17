@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.news.adapters.MyNewsRecyclerViewAdapter;
 import com.example.news.utils.NewsResponse;
+import com.example.news.utils.Utility;
 import com.example.news.utils.VolleySingleton;
 import com.example.news.utils.News;
 import com.example.news.R;
@@ -75,7 +76,13 @@ public class FragmentListingNews extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        getData();
+        if (Utility.HaveNetworkConnection(getActivity())) {
+            getData();
+        }
+        else
+        {
+            Toast.makeText(getActivity(),"There is no internet connection",Toast.LENGTH_LONG).show();
+        }
     }
 
     private void getData() {

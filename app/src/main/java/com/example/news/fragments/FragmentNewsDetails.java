@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.news.utils.NewsDetailsResponse;
 import com.example.news.utils.NewsResponse;
+import com.example.news.utils.Utility;
 import com.example.news.utils.VolleySingleton;
 import com.example.news.R;
 import com.example.news.activities.ActivityListingNews;
@@ -77,7 +78,12 @@ public class FragmentNewsDetails extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        GetNewsDetails();
+        if (Utility.HaveNetworkConnection(getActivity())) {
+            GetNewsDetails();
+        }
+        else {
+            Toast.makeText(getActivity(),"There is no internet connection",Toast.LENGTH_LONG).show();
+        }
     }
 
     private void GetNewsDetails() {
