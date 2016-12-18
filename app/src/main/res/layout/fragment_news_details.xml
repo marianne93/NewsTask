@@ -32,7 +32,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="@dimen/height200">
 
                     <com.android.volley.toolbox.NetworkImageView
 
@@ -47,16 +47,16 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_margin="20dp"
+                        android:layout_margin="@dimen/margin20"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:textSize="16sp"/>
+                        android:textSize="@dimen/textsize16"/>
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="@dimen/height80"
                     android:background="@color/red"
                     android:orientation="horizontal">
 
@@ -67,17 +67,17 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="@dimen/padding10"
                         android:textColor="@color/white"
-                        android:textSize="13sp"/>
+                        android:textSize="@dimen/textsize13"/>
 
                     <View style="@style/Divider" />
 
                     <ImageView
 
                         android:id="@+id/news_likes_icon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/width20"
+                        android:layout_height="@dimen/height20"
                         android:layout_gravity="center"
                         android:layout_weight="1" />
 
@@ -87,9 +87,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="@dimen/padding10"
                         android:textColor="@color/yellow"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/textsize12"
 
                         />
 
@@ -98,8 +98,8 @@
                     <ImageView
 
                         android:id="@+id/news_views_icon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/width20"
+                        android:layout_height="@dimen/height20"
                         android:layout_gravity="center"
                         android:layout_weight="1"
 
@@ -112,10 +112,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingLeft="@dimen/padding10"
+                        android:paddingRight="@dimen/padding10"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/textsize12"
                         />
 
 
@@ -125,7 +125,7 @@
                     android:id="@+id/news_description"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp"
+                    android:padding="@dimen/padding16"
                     android:textColor="@color/black" />
 
             </LinearLayout>

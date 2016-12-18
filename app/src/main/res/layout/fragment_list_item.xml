@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="@dimen/height125"
         android:orientation="horizontal">
 
         <android.support.v7.widget.CardView
@@ -20,14 +20,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/margin5"
                 android:orientation="horizontal">
 
                 <com.example.news.views.CircularNetworkImageView
 
                     android:id="@+id/list_item_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/height80"
                     android:layout_gravity="center_vertical"
 
                     />
@@ -35,18 +35,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="@dimen/margin25"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/list_item_news_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="40dp"
+                        android:layout_marginRight="@dimen/margin40"
                         android:maxLines="3"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/textsize16"
                         android:textStyle="bold"
 
                         />
@@ -65,7 +65,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
                             android:textColor="@color/lightRed"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/textsize12"
                             android:textStyle="bold" />
 
                         <TextView
@@ -73,10 +73,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/margin10"
                             android:textColor="@color/transparentRed"
 
-                            android:textSize="12sp"
+                            android:textSize="@dimen/textsize12"
 
 
                             />
@@ -88,9 +88,9 @@
 
 
                             android:layout_gravity="bottom"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/margin10"
                             android:textColor="@color/transparentRed"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/textsize12"
 
 
                             />
@@ -110,8 +110,8 @@
         android:id="@+id/list_item_news_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="@dimen/margin50"
+        android:layout_marginTop="@dimen/margin8"
 
 
         />
