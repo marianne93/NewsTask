@@ -2,7 +2,7 @@
 <FrameLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <include layout="@layout/progress_indicator"></include>
+
 
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,6 +14,6 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="com.example.news.fragments.FragmentListingNews"
      />
-
+    <include layout="@layout/progress_indicator"></include>
 </FrameLayout>
 <!-- tools:listitem="@layout/fragment_list_item" -->

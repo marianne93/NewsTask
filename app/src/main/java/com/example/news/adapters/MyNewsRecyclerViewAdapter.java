@@ -1,6 +1,7 @@
 package com.example.news.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,8 +59,8 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
         holder.mDate.setText(holder.mNews.PostDate);
         holder.mLikes.setText(mcontext.getResources().getString(R.string.likes) + "(" + holder.mNews.Likes + ")");
         holder.mViews.setText(holder.mNews.NumofViews + " " + mcontext.getResources().getString(R.string.views));
-        holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
-
+        //    holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
+        holder.mCardView.setCardBackgroundColor(ContextCompat.getColor(mcontext, R.color.transparentWhite));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

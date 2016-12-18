@@ -68,13 +68,11 @@ public class Utility {
         boolean haveConnectedMobile = false;
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null) {
+            if (netInfo.getType() == ConnectivityManager.TYPE_WIFI)
                     haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
+            if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE)
                     haveConnectedMobile = true;
         }
         return haveConnectedWifi || haveConnectedMobile;
