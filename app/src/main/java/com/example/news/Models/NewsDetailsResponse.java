@@ -1,4 +1,4 @@
-package com.example.news.utils;
+package com.example.news.Models;
 
 /**
  * Created by Marianne on 17-Dec-16.

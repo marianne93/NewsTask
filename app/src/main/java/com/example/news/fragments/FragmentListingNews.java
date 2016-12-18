@@ -16,21 +16,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.news.adapters.MyNewsRecyclerViewAdapter;
-import com.example.news.utils.NewsResponse;
-import com.example.news.utils.Utility;
-import com.example.news.utils.VolleySingleton;
-import com.example.news.utils.News;
+import com.example.news.Models.NewsResponse;
+import com.example.news.Helpers.Utility;
+import com.example.news.Helpers.VolleySingleton;
+import com.example.news.Models.News;
 import com.example.news.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -84,10 +80,8 @@ public class FragmentListingNews extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (Utility.HaveNetworkConnection(getActivity())) {
             getData();
-        }
-        else
-        {
-            Toast.makeText(getActivity(),"There is no internet connection",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "There is no internet connection", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -122,7 +116,16 @@ public class FragmentListingNews extends Fragment {
         //Adding our request to the queue
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
 
+
     }
+
+    Response.Listener<String> responseListner = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+
+        }
+    };
+
 
     private void getNewsDataFromJson(JSONObject response) {
 

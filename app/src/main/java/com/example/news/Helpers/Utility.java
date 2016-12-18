@@ -1,4 +1,4 @@
-package com.example.news.utils;
+package com.example.news.Helpers;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

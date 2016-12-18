@@ -5,14 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.news.R;
-import com.example.news.fragments.FragmentListingNews;
-import com.example.news.utils.News;
-import com.example.news.utils.Utility;
+import com.example.news.Helpers.Utility;
 
 import java.util.ArrayList;
 
