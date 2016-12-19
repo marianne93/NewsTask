@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.example.news.Helpers.Constants;
 import com.example.news.adapters.DrawerItemsAdapter;
 import com.example.news.fragments.FragmentListingNews;
 import com.example.news.R;
@@ -29,8 +30,7 @@ public class ActivityListingNews extends AppCompatActivity
     private RecyclerView mDrawerList;
     private ArrayList<String> mDrawerItemsTitles = new ArrayList<String>();
     private DrawerItemsAdapter drawerItemsAdapter;
-    private static final String NEWSLISTINGFRAGMENT_TAG = "lFTAG";
-    public static final String NEWSID = "id";
+
     private SearchView msearch;
 
     @Override
@@ -54,7 +54,7 @@ public class ActivityListingNews extends AppCompatActivity
 
             FragmentListingNews fragment = new FragmentListingNews();
 
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, NEWSLISTINGFRAGMENT_TAG).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment,Constants.NEWSLISTINGFRAGMENT_TAG).commit();
         }
         // Set the list's click listener
   /*      mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,7 +129,7 @@ public class ActivityListingNews extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(NEWSID ,news.Nid);
+        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(Constants.NEWSID,news.Nid);
         startActivity(intent);
     }
 }

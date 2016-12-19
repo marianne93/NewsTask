@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.news.Helpers.Constants;
 import com.example.news.Models.NewsDetailsResponse;
 import com.example.news.Helpers.Utility;
 import com.example.news.Helpers.VolleySingleton;
@@ -39,7 +40,7 @@ import org.json.JSONObject;
  */
 public class FragmentNewsDetails extends Fragment {
     private ShareActionProvider mShareActionProvider;
-    private static final String TAG = "DetailsRequestTag";
+
     private String mNewsID;
     private TextView mNewsTitle;
     private NetworkImageView mNewsImage;
@@ -62,7 +63,7 @@ public class FragmentNewsDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mNewsID = getActivity().getIntent().getStringExtra(ActivityListingNews.NEWSID);
+        mNewsID = getActivity().getIntent().getStringExtra(Constants.NEWSID);
         // Toast.makeText(getActivity(), newsID, Toast.LENGTH_LONG).show();
         View rootView = inflater.inflate(R.layout.fragment_news_details, container, false);
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
@@ -126,7 +127,7 @@ public class FragmentNewsDetails extends Fragment {
                     }
                 }
         );
-        jsonObjectRequest.setTag(TAG);
+        jsonObjectRequest.setTag(Constants.DETAILSTAG);
 
 
         //Adding our request to the queue
@@ -179,7 +180,7 @@ public class FragmentNewsDetails extends Fragment {
     public void onStop() {
         super.onStop();
         if (VolleySingleton.getInstance(getActivity()).getRequestQueue() != null) {
-            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
+            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(Constants.DETAILSTAG);
         }
     }
 }

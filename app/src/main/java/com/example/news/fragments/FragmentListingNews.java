@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.news.Helpers.Constants;
+import com.example.news.Helpers.Services;
 import com.example.news.adapters.MyNewsRecyclerViewAdapter;
 import com.example.news.Models.NewsResponse;
 import com.example.news.Helpers.Utility;
@@ -37,7 +39,6 @@ import java.util.ArrayList;
 public class FragmentListingNews extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
-    private static final String TAG = "RequestTag";
     private OnListFragmentInteractionListener mListener;
     public static ArrayList<News> newsArrayList = new ArrayList<>();
     MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
@@ -86,6 +87,7 @@ public class FragmentListingNews extends Fragment {
     }
 
     private void getData() {
+        Services.getNews();
         final String NEWS_BASE_URL =
                 "http://egyptinnovate.com/en/api/v01/safe/GetNews";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(NEWS_BASE_URL, null,
@@ -110,7 +112,7 @@ public class FragmentListingNews extends Fragment {
                     }
                 }
         );
-        jsonObjectRequest.setTag(TAG);
+        jsonObjectRequest.setTag(Constants.TAG);
 
 
         //Adding our request to the queue
@@ -154,7 +156,7 @@ public class FragmentListingNews extends Fragment {
     public void onStop() {
         super.onStop();
         if (VolleySingleton.getInstance(getActivity()).getRequestQueue() != null) {
-            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(TAG);
+            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(Constants.TAG);
         }
     }
 
