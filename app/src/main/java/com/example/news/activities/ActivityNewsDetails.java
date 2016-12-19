@@ -1,5 +1,7 @@
 package com.example.news.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,12 @@ import android.view.View;
 import com.example.news.R;
 
 public class ActivityNewsDetails extends AppCompatActivity {
+
+    public static void startActivity(Context context, String id) {
+        Intent i = new Intent(context, ActivityNewsDetails.class);
+        i.putExtra("", id);
+        context.startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,5 +5,13 @@ package com.example.news.Models;
  */
 
 public class NewsDetailsResponse {
-    public NewsItem newsItem;
+    private NewsItem newsItem;
+
+    public NewsItem getNewsItem() {
+        return newsItem;
+    }
+
+    public void setNewsItem(NewsItem newsItem) {
+        this.newsItem = newsItem;
+    }
 }

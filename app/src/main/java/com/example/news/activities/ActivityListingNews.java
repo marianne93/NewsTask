@@ -54,7 +54,7 @@ public class ActivityListingNews extends AppCompatActivity
 
             FragmentListingNews fragment = new FragmentListingNews();
 
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment,Constants.NEWSLISTINGFRAGMENT_TAG).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, Constants.NEWSLISTINGFRAGMENT_TAG).commit();
         }
         // Set the list's click listener
   /*      mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,8 +92,6 @@ public class ActivityListingNews extends AppCompatActivity
         int searchImgId = android.support.v7.appcompat.R.id.search_button; // I used the explicit layout ID of searchview's ImageView
         ImageView v = (ImageView) mSearchView.findViewById(searchImgId);
         v.setImageResource(R.drawable.filter);
-
-
         return super.onPrepareOptionsMenu(menu);
 
     }
@@ -129,7 +127,7 @@ public class ActivityListingNews extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(Constants.NEWSID,news.Nid);
+        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(Constants.NEWSID, news.getNid());
         startActivity(intent);
     }
 }

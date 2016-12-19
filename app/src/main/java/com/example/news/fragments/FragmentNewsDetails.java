@@ -1,7 +1,6 @@
 package com.example.news.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -13,26 +12,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.news.Helpers.Constants;
+import com.example.news.Helpers.ParseNewsResponse;
 import com.example.news.Models.NewsDetailsResponse;
 import com.example.news.Helpers.Utility;
-import com.example.news.Helpers.VolleySingleton;
+import com.example.news.Helpers.Services;
 import com.example.news.R;
-import com.example.news.activities.ActivityListingNews;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -45,14 +40,15 @@ public class FragmentNewsDetails extends Fragment {
     private TextView mNewsTitle;
     private NetworkImageView mNewsImage;
     private TextView mNewsDate;
-    private ImageView mNewsLikesIcon;
+
     private TextView mNewsLikes;
-    private ImageView mNewsViewsIcon;
+
     private TextView mNewsViews;
     private TextView mNewsDescription;
     private ImageLoader mimageLoader;
     private String mShareURL;
     ProgressBar mProgressBar;
+    private ScrollView scrlNewsDetails;
 
 
     public FragmentNewsDetails() {
@@ -73,10 +69,11 @@ public class FragmentNewsDetails extends Fragment {
         mNewsImage = (NetworkImageView) rootView.findViewById(R.id.news_image);
         mNewsDate = (TextView) rootView.findViewById(R.id.news_date);
         mNewsLikes = (TextView) rootView.findViewById(R.id.news_likes);
-        mNewsLikesIcon = (ImageView) rootView.findViewById(R.id.news_likes_icon);
+
         mNewsViews = (TextView) rootView.findViewById(R.id.news_views);
-        mNewsViewsIcon = (ImageView) rootView.findViewById(R.id.news_views_icon);
+
         mNewsDescription = (TextView) rootView.findViewById(R.id.news_description);
+        scrlNewsDetails = (ScrollView) rootView.findViewById(R.id.scrlNewsDetails);
 
 
         return rootView;
@@ -87,67 +84,41 @@ public class FragmentNewsDetails extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (Utility.HaveNetworkConnection(getActivity())) {
             GetNewsDetails();
-        }
-        else {
-            Toast.makeText(getActivity(),"There is no internet connection",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "There is no internet connection", Toast.LENGTH_LONG).show();
         }
     }
 
     private void GetNewsDetails() {
-        final String NEWS_BASE_URL =
-                "http://egyptinnovate.com/en/api/v01/safe/GetNewsDetails";
-        final String NEWS_PARAM = "nid";
-        Uri builtUri = Uri.parse(NEWS_BASE_URL).buildUpon()
-                .appendQueryParameter(NEWS_PARAM, mNewsID).build();
-        final String DATA_URL = builtUri.toString();
+        Services.getInstance(getActivity()).getNewsDetails(mNewsID, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                getNewsDetailsFromJson(response);
+               
+                mProgressBar.setVisibility(View.GONE);
+                scrlNewsDetails.setVisibility(View.VISIBLE);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
 
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(DATA_URL, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-                            getNewsDetailsFromJson(response);
-                            mProgressBar.setVisibility(View.GONE);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_LONG).show();
-
-                    }
-                }
-        );
-        jsonObjectRequest.setTag(Constants.DETAILSTAG);
-
-
-        //Adding our request to the queue
-        VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void getNewsDetailsFromJson(JSONObject response) throws JSONException {
-        String newsStr = response.toString();
-        Gson gson = new GsonBuilder().create();
-        NewsDetailsResponse newsDetailsResponse = gson.fromJson(newsStr, NewsDetailsResponse.class);
-        mNewsTitle.setText(newsDetailsResponse.newsItem.NewsTitle);
-        mimageLoader = VolleySingleton.getInstance(getActivity()).getImageLoader();
-        mNewsImage.setImageUrl(newsDetailsResponse.newsItem.ImageUrl, mimageLoader);
-        mNewsDate.setText(newsDetailsResponse.newsItem.PostDate);
-        mNewsLikesIcon.setImageResource(R.drawable.likes);
-        mNewsLikes.setText(getActivity().getResources().getString(R.string.likes) + " (" + newsDetailsResponse.newsItem.Likes + ")");
-        mNewsViewsIcon.setImageResource(R.drawable.views_icon);
-        mNewsViews.setText(newsDetailsResponse.newsItem.NumofViews + " " + getActivity().getResources().getString(R.string.views));
-        mNewsDescription.setText(newsDetailsResponse.newsItem.ItemDescription);
-        mShareURL = newsDetailsResponse.newsItem.ShareURL;
+    private void getNewsDetailsFromJson(JSONObject response) {
+        NewsDetailsResponse newsDetailsResponse = ParseNewsResponse.getInstance(getActivity()).getNewsDetailsDataFromJson(response);
+        mNewsTitle.setText(newsDetailsResponse.getNewsItem().getNewsTitle());
+        mimageLoader = Services.getInstance(getActivity()).getImageLoader();
+        mNewsImage.setImageUrl(newsDetailsResponse.getNewsItem().getImageUrl(), mimageLoader);
+        mNewsDate.setText(newsDetailsResponse.getNewsItem().getPostDate());
+
+        mNewsLikes.setText(getActivity().getResources().getString(R.string.likes) + " (" + newsDetailsResponse.getNewsItem().getLikes() + ")");
+
+        mNewsViews.setText(newsDetailsResponse.getNewsItem().getNumofViews() + " " + getActivity().getResources().getString(R.string.views));
+        mNewsDescription.setText(newsDetailsResponse.getNewsItem().getItemDescription());
+        mShareURL = newsDetailsResponse.getNewsItem().getShareURL();
         mShareActionProvider.setShareIntent(createShareNewsIntent());
 
     }
@@ -170,7 +141,7 @@ public class FragmentNewsDetails extends Fragment {
 
     private Intent createShareNewsIntent() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT );
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, mShareURL);
         return shareIntent;
@@ -179,8 +150,8 @@ public class FragmentNewsDetails extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (VolleySingleton.getInstance(getActivity()).getRequestQueue() != null) {
-            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(Constants.DETAILSTAG);
+        if (Services.getInstance(getActivity()).getRequestQueue() != null) {
+            Services.getInstance(getActivity()).getRequestQueue().cancelAll(Constants.DETAILSTAG);
         }
     }
 }

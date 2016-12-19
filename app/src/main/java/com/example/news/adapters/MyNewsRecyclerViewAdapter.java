@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.example.news.Helpers.VolleySingleton;
+import com.example.news.Helpers.Services;
 import com.example.news.Models.News;
 import com.example.news.R;
 import com.example.news.Helpers.Utility;
@@ -51,14 +51,15 @@ public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mNews = mValues.get(position);
-        mimageLoader = VolleySingleton.getInstance(mcontext).getImageLoader();
+        mimageLoader = Services.getInstance(mcontext).getImageLoader();
 
-        holder.mIcon.setImageUrl(holder.mNews.ImageUrl, mimageLoader);
-        holder.mTitle.setText(holder.mNews.NewsTitle);
-        holder.mNewsType.setImageResource(Utility.getImageResourceForNewsType(holder.mNews.NewsType));
-        holder.mDate.setText(holder.mNews.PostDate);
-        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes) + "(" + holder.mNews.Likes + ")");
-        holder.mViews.setText(holder.mNews.NumofViews + " " + mcontext.getResources().getString(R.string.views));
+        holder.mIcon.setDefaultImageResId(R.drawable.filter); //Placeholder
+        holder.mIcon.setImageUrl(holder.mNews.getImageUrl(), mimageLoader);
+        holder.mTitle.setText(holder.mNews.getNewsTitle());
+        holder.mNewsType.setImageResource(Utility.getImageResourceForNewsType(holder.mNews.getNewsType()));
+        holder.mDate.setText(holder.mNews.getPostDate());
+        holder.mLikes.setText(mcontext.getResources().getString(R.string.likes) + "(" + holder.mNews.getLikes() + ")");
+        holder.mViews.setText(holder.mNews.getNumofViews() + " " + mcontext.getResources().getString(R.string.views));
         //    holder.mCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.transparentWhite));
         holder.mCardView.setCardBackgroundColor(ContextCompat.getColor(mcontext, R.color.transparentWhite));
 

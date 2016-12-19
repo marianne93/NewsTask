@@ -14,13 +14,11 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.news.Helpers.Constants;
-import com.example.news.Helpers.Services;
+import com.example.news.Helpers.ParseNewsResponse;
 import com.example.news.adapters.MyNewsRecyclerViewAdapter;
 import com.example.news.Models.NewsResponse;
 import com.example.news.Helpers.Utility;
-import com.example.news.Helpers.VolleySingleton;
+import com.example.news.Helpers.Services;
 import com.example.news.Models.News;
 import com.example.news.R;
 import com.google.gson.Gson;
@@ -29,6 +27,7 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -40,7 +39,7 @@ public class FragmentListingNews extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private OnListFragmentInteractionListener mListener;
-    public static ArrayList<News> newsArrayList = new ArrayList<>();
+    private ArrayList<News> newsArrayList = new ArrayList<>();
     MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
     ProgressBar mProgressBar;
 
@@ -87,46 +86,42 @@ public class FragmentListingNews extends Fragment {
     }
 
     private void getData() {
-        Services.getNews();
-        final String NEWS_BASE_URL =
-                "http://egyptinnovate.com/en/api/v01/safe/GetNews";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(NEWS_BASE_URL, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+        Services.getInstance(getActivity()).getNews(new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //   getNewsDataFromJson(response);
+                newsArrayList.addAll((ParseNewsResponse.getInstance(getActivity()).getNewsDataFromJson(response)).getNews());
+                myNewsRecyclerViewAdapter.notifyDataSetChanged();
+                mProgressBar.setVisibility(View.GONE);
 
-                        getNewsDataFromJson(response);
-                        myNewsRecyclerViewAdapter.notifyDataSetChanged();
-                        mProgressBar.setVisibility(View.GONE);
-
-
-                    }
-
-
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_LONG).show();
-
-                    }
-                }
-        );
-        jsonObjectRequest.setTag(Constants.TAG);
-
-
-        //Adding our request to the queue
-        VolleySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjectRequest);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }
 
-    Response.Listener<String> responseListner = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
+    private void getDataTest() {
+        Services.getInstance(getActivity()).getNewsTest(new Response.Listener<List<News>>() {
+            @Override
+            public void onResponse(List<News> response) {
+                newsArrayList.addAll(response);
+                myNewsRecyclerViewAdapter.notifyDataSetChanged();
+                mProgressBar.setVisibility(View.GONE);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
 
-        }
-    };
+
+    }
 
 
     private void getNewsDataFromJson(JSONObject response) {
@@ -134,9 +129,7 @@ public class FragmentListingNews extends Fragment {
         String newsStr = response.toString();
         Gson gson = new GsonBuilder().create();
         NewsResponse newsResponse = gson.fromJson(newsStr, NewsResponse.class);
-        newsArrayList.addAll(newsResponse.News);
-
-
+        newsArrayList.addAll(newsResponse.getNews());
     }
 
     @Override
@@ -155,8 +148,8 @@ public class FragmentListingNews extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (VolleySingleton.getInstance(getActivity()).getRequestQueue() != null) {
-            VolleySingleton.getInstance(getActivity()).getRequestQueue().cancelAll(Constants.TAG);
+        if (Services.getInstance(getActivity()).getRequestQueue() != null) {
+            Services.getInstance(getActivity()).getRequestQueue().cancelAll(Services.Tag.NEWS);
         }
     }
 
@@ -177,7 +170,6 @@ public class FragmentListingNews extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(News item);
     }
 
