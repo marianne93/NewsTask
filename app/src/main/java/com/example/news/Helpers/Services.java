@@ -1,4 +1,4 @@
-package com.example.news.Helpers;
+package com.example.news.helpers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -97,7 +97,7 @@ public class Services {
 
         Uri builtUri = Uri.parse(NEWS_DETAILS_URL).buildUpon()
                 .appendQueryParameter(NEWS_PARAM, newsID).build();
-        final String DATA_URL = builtUri.toString();
+        String DATA_URL = builtUri.toString();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(DATA_URL, null,
                 successListener,errorListener
         );

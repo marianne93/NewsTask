@@ -60,7 +60,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding20"
+                    android:padding="@dimen/padding16"
 
                     android:background="@color/red"
                     android:orientation="horizontal">
@@ -70,6 +70,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:gravity="center_horizontal"
                         android:layout_marginTop="@dimen/margin10"
                         android:layout_marginBottom="@dimen/margin10"
                         android:layout_weight="1"
@@ -81,8 +82,9 @@
                     <TextView
                         android:id="@+id/news_likes"
                         android:layout_width="0dp"
+                        android:gravity="center_horizontal"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/margin8"
+                        android:drawablePadding="@dimen/margin5"
                         android:layout_gravity="center"
                         android:drawableStart="@drawable/views_icon"
                         android:layout_weight="1"
@@ -96,9 +98,10 @@
                     <TextView
                         android:id="@+id/news_views"
                         android:layout_width="0dp"
+                        android:gravity="center_horizontal"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:drawablePadding="@dimen/margin8"
+                        android:drawablePadding="@dimen/margin5"
                         android:layout_weight="1"
                         android:drawableStart="@drawable/views_icon"
                         android:textColor="@color/white"

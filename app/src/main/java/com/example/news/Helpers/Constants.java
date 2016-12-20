@@ -1,6 +1,4 @@
-package com.example.news.Helpers;
-
-import java.security.PublicKey;
+package com.example.news.helpers;
 
 /**
  * Created by Marianne.Wazif on 18-Dec-16.

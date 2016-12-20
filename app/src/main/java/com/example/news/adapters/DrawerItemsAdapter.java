@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.news.R;
-import com.example.news.Helpers.Utility;
+import com.example.news.helpers.Utility;
 
 import java.util.ArrayList;
 

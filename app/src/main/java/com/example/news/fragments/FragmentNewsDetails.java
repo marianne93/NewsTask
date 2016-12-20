@@ -21,11 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.news.Helpers.Constants;
-import com.example.news.Helpers.ParseNewsResponse;
+import com.example.news.helpers.Constants;
+import com.example.news.helpers.ParseNewsResponse;
 import com.example.news.Models.NewsDetailsResponse;
-import com.example.news.Helpers.Utility;
-import com.example.news.Helpers.Services;
+import com.example.news.helpers.Utility;
+import com.example.news.helpers.Services;
 import com.example.news.R;
 
 import org.json.JSONObject;
@@ -47,7 +47,7 @@ public class FragmentNewsDetails extends Fragment {
     private TextView mNewsDescription;
     private ImageLoader mimageLoader;
     private String mShareURL;
-    ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
     private ScrollView scrlNewsDetails;
 
     public static FragmentNewsDetails newInstance() {

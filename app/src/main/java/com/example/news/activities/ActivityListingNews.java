@@ -1,6 +1,5 @@
 package com.example.news.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.example.news.Helpers.Constants;
+import com.example.news.helpers.Constants;
 import com.example.news.adapters.DrawerItemsAdapter;
 import com.example.news.fragments.FragmentListingNews;
 import com.example.news.R;
@@ -127,7 +126,8 @@ public class ActivityListingNews extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(News news) {
-        Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(Constants.NEWSID, news.getNid());
-        startActivity(intent);
+    //    Intent intent = new Intent(this, ActivityNewsDetails.class).putExtra(Constants.NEWSID, news.getNid());
+    //    startActivity(intent);
+        ActivityNewsDetails.startActivity(this,news.getNid());
     }
 }

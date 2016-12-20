@@ -14,11 +14,11 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.news.Helpers.ParseNewsResponse;
+import com.example.news.helpers.ParseNewsResponse;
 import com.example.news.adapters.MyNewsRecyclerViewAdapter;
 import com.example.news.Models.NewsResponse;
-import com.example.news.Helpers.Utility;
-import com.example.news.Helpers.Services;
+import com.example.news.helpers.Utility;
+import com.example.news.helpers.Services;
 import com.example.news.Models.News;
 import com.example.news.R;
 import com.google.gson.Gson;
@@ -39,9 +39,9 @@ public class FragmentListingNews extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private OnListFragmentInteractionListener mListener;
-    private ArrayList<News> newsArrayList = new ArrayList<>();
-    MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
-    ProgressBar mProgressBar;
+    private ArrayList<News> mNewsArrayList = new ArrayList<>();
+    private MyNewsRecyclerViewAdapter myNewsRecyclerViewAdapter;
+    private ProgressBar mProgressBar;
 
 
     /**
@@ -50,6 +50,7 @@ public class FragmentListingNews extends Fragment {
      */
     public FragmentListingNews() {
     }
+
     public static FragmentListingNews newInstance() {
         return new FragmentListingNews();
     }
@@ -71,10 +72,22 @@ public class FragmentListingNews extends Fragment {
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(newsArrayList, mListener, getActivity());
+        myNewsRecyclerViewAdapter = new MyNewsRecyclerViewAdapter(mNewsArrayList, mListener, getActivity());
         recyclerView.setAdapter(myNewsRecyclerViewAdapter);
+//        setListeners();
         return view;
     }
+//
+//    private void setListeners() {
+//        mProgressBar.setOnClickListener(clickListener);
+//    }
+//
+//    private View.OnClickListener clickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//
+//        }
+//    };
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -92,7 +105,7 @@ public class FragmentListingNews extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 //   getNewsDataFromJson(response);
-                newsArrayList.addAll((ParseNewsResponse.getInstance(getActivity()).getNewsDataFromJson(response)).getNews());
+                mNewsArrayList.addAll((ParseNewsResponse.getInstance(getActivity()).getNewsDataFromJson(response)).getNews());
                 myNewsRecyclerViewAdapter.notifyDataSetChanged();
                 mProgressBar.setVisibility(View.GONE);
 
@@ -111,7 +124,7 @@ public class FragmentListingNews extends Fragment {
         Services.getInstance(getActivity()).getNewsTest(new Response.Listener<List<News>>() {
             @Override
             public void onResponse(List<News> response) {
-                newsArrayList.addAll(response);
+                mNewsArrayList.addAll(response);
                 myNewsRecyclerViewAdapter.notifyDataSetChanged();
                 mProgressBar.setVisibility(View.GONE);
             }
@@ -131,7 +144,7 @@ public class FragmentListingNews extends Fragment {
         String newsStr = response.toString();
         Gson gson = new GsonBuilder().create();
         NewsResponse newsResponse = gson.fromJson(newsStr, NewsResponse.class);
-        newsArrayList.addAll(newsResponse.getNews());
+        mNewsArrayList.addAll(newsResponse.getNews());
     }
 
     @Override

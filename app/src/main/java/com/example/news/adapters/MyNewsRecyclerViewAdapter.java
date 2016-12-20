@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.example.news.Helpers.Services;
+import com.example.news.helpers.Services;
 import com.example.news.Models.News;
 import com.example.news.R;
-import com.example.news.Helpers.Utility;
+import com.example.news.helpers.Utility;
 import com.example.news.fragments.FragmentListingNews.OnListFragmentInteractionListener;
 import com.example.news.views.CircularNetworkImageView;
 // import com.example.news.dummy.DummyContent.News;
