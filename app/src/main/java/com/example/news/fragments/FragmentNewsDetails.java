@@ -50,9 +50,11 @@ public class FragmentNewsDetails extends Fragment {
     ProgressBar mProgressBar;
     private ScrollView scrlNewsDetails;
 
+    public static FragmentNewsDetails newInstance() {
+        return new FragmentNewsDetails();
+    }
 
     public FragmentNewsDetails() {
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class FragmentNewsDetails extends Fragment {
         mNewsDescription = (TextView) rootView.findViewById(R.id.news_description);
         scrlNewsDetails = (ScrollView) rootView.findViewById(R.id.scrlNewsDetails);
 
-
+        setHasOptionsMenu(true);
         return rootView;
     }
 
@@ -94,7 +96,7 @@ public class FragmentNewsDetails extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 getNewsDetailsFromJson(response);
-               
+
                 mProgressBar.setVisibility(View.GONE);
                 scrlNewsDetails.setVisibility(View.VISIBLE);
             }

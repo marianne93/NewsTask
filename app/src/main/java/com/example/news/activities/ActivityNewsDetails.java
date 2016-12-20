@@ -11,7 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.news.Helpers.Constants;
 import com.example.news.R;
+import com.example.news.fragments.FragmentListingNews;
+import com.example.news.fragments.FragmentNewsDetails;
 
 public class ActivityNewsDetails extends AppCompatActivity {
 
@@ -29,6 +32,9 @@ public class ActivityNewsDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.container, FragmentNewsDetails.newInstance(), Constants.NEWSDETAILSFRAGMENT_TAG).commit();
+        }
 
     }
 }
