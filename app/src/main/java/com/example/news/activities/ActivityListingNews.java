@@ -54,7 +54,7 @@ public class ActivityListingNews extends AppCompatActivity
 
             FragmentListingNews fragment = new FragmentListingNews();
 
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, Constants.NEWSLISTINGFRAGMENT_TAG).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, FragmentListingNews.newInstance(), Constants.NEWSLISTINGFRAGMENT_TAG).commit();
         }
         // Set the list's click listener
   /*      mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

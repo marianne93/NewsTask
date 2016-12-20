@@ -50,7 +50,9 @@ public class FragmentListingNews extends Fragment {
      */
     public FragmentListingNews() {
     }
-
+    public static FragmentListingNews newInstance() {
+        return new FragmentListingNews();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

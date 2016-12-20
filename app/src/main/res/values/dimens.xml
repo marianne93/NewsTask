@@ -29,6 +29,8 @@
     <dimen name="textsize13">13sp</dimen>
     <dimen name="width20">20dp</dimen>
     <dimen name="height20">20dp</dimen>
+    <dimen name="padding20">20dp</dimen>
+
 
 
 
